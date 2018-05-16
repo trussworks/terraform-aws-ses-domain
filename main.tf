@@ -30,6 +30,7 @@ locals {
   stripped_domain_name = "${replace(var.domain_name, "/[.]$/", "")}"
 
   stripped_mail_from_domain = "${replace(var.mail_from_domain, "/[.]$/", "")}"
+  dash_domain               = "${replace(var.domain_name, ".", "-")}"
 }
 
 #
@@ -91,13 +92,41 @@ resource "aws_route53_record" "spf" {
   records = ["v=spf1 include:amazonses.com -all"]
 }
 
-# MX Record
+# Sending MX Record
 data "aws_region" "current" {}
 
-resource "aws_route53_record" "mx" {
+resource "aws_route53_record" "mx-send" {
   zone_id = "${var.route53_zone_id}"
   name    = "${aws_ses_domain_mail_from.main.mail_from_domain}"
   type    = "MX"
   ttl     = "600"
   records = ["10 feedback-smtp.${data.aws_region.current.name}.amazonses.com"]
+}
+
+# Receiving MX Record
+resource "aws_route53_record" "mx-receive" {
+  zone_id = "${var.route53_zone_id}"
+  name    = "${var.domain_name}"
+  type    = "MX"
+  ttl     = "600"
+  records = ["10 inbound-smtp.${data.aws_region.current.name}.amazonaws.com"]
+}
+
+#
+# SES Receipt Rule
+#
+
+resource "aws_ses_receipt_rule" "main" {
+  name          = "${format("%s-s3-rule", local.dash_domain)}"
+  rule_set_name = "${var.ses_rule_set}"
+  recipients    = ["${var.from_addresses}"]
+  enabled       = true
+  scan_enabled  = true
+
+  s3_action {
+    position = 1
+
+    bucket_name       = "${var.receive_s3_bucket}"
+    object_key_prefix = "${var.receive_s3_prefix}"
+  }
 }
