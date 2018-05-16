@@ -28,6 +28,7 @@ module "ses_domain" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | domain_name | The domain name to configure SES. | string | - | yes |
+| enable_verification | Control whether or not to verify SES DNS records. | string | `true` | no |
 | mail_from_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | string | - | yes |
 | route53_zone_id | Route53 host zone ID to enable SES. | string | - | yes |
 

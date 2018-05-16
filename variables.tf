@@ -3,6 +3,12 @@ variable "domain_name" {
   type        = "string"
 }
 
+variable "enable_verification" {
+  description = "Control whether or not to verify SES DNS records."
+  type        = "string"
+  default     = true
+}
+
 variable "mail_from_domain" {
   description = " Subdomain (of the route53 zone) which is to be used as MAIL FROM address"
   type        = "string"
