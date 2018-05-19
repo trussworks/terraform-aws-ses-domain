@@ -30,7 +30,11 @@ module "ses_domain" {
 |------|-------------|:----:|:-----:|:-----:|
 | domain_name | The domain name to configure SES. | string | - | yes |
 | enable_verification | Control whether or not to verify SES DNS records. | string | `true` | no |
+| from_addresses | List of email addresses to catch bounces and rejections | list | - | yes |
 | mail_from_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | string | - | yes |
+| receive_s3_bucket | Name of the S3 bucket to store received emails. | string | - | yes |
+| receive_s3_prefix | The key prefix of the S3 bucket to store received emails. | string | - | yes |
 | route53_zone_id | Route53 host zone ID to enable SES. | string | - | yes |
+| ses_rule_set | Name of the SES rule set to associate rules with. | string | - | yes |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
