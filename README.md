@@ -1,3 +1,4 @@
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES)
 
 Creates the following resources:
@@ -32,3 +33,4 @@ module "ses_domain" {
 | mail_from_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | string | - | yes |
 | route53_zone_id | Route53 host zone ID to enable SES. | string | - | yes |
 
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
