@@ -84,9 +84,17 @@ resource "aws_ses_domain_mail_from" "main" {
 }
 
 # SPF validaton record
-resource "aws_route53_record" "spf" {
+resource "aws_route53_record" "spf_mail_from" {
   zone_id = "${var.route53_zone_id}"
   name    = "${aws_ses_domain_mail_from.main.mail_from_domain}"
+  type    = "TXT"
+  ttl     = "600"
+  records = ["v=spf1 include:amazonses.com -all"]
+}
+
+resource "aws_route53_record" "spf_domain" {
+  zone_id = "${var.route53_zone_id}"
+  name    = "${var.domain_name}"
   type    = "TXT"
   ttl     = "600"
   records = ["v=spf1 include:amazonses.com -all"]
@@ -95,7 +103,7 @@ resource "aws_route53_record" "spf" {
 # Sending MX Record
 data "aws_region" "current" {}
 
-resource "aws_route53_record" "mx-send" {
+resource "aws_route53_record" "mx_send_mail_from" {
   zone_id = "${var.route53_zone_id}"
   name    = "${aws_ses_domain_mail_from.main.mail_from_domain}"
   type    = "MX"
@@ -104,7 +112,7 @@ resource "aws_route53_record" "mx-send" {
 }
 
 # Receiving MX Record
-resource "aws_route53_record" "mx-receive" {
+resource "aws_route53_record" "mx_receive" {
   zone_id = "${var.route53_zone_id}"
   name    = "${var.domain_name}"
   type    = "MX"
