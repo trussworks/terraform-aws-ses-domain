@@ -28,6 +28,7 @@ module "ses_domain" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| dmarc_rua | Email address for capturing DMARC aggregate reports. | string | - | yes |
 | domain_name | The domain name to configure SES. | string | - | yes |
 | enable_verification | Control whether or not to verify SES DNS records. | string | `true` | no |
 | from_addresses | List of email addresses to catch bounces and rejections | list | - | yes |

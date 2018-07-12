@@ -121,6 +121,17 @@ resource "aws_route53_record" "mx_receive" {
 }
 
 #
+# DMARC TXT Record
+#
+resource "aws_route53_record" "txt_dmarc" {
+  zone_id = "${var.route53_zone_id}"
+  name    = "_dmarc.${var.domain_name}"
+  type    = "TXT"
+  ttl     = "600"
+  records = ["v=DMARC1; p=none; rua=mailto:${var.dmarc_rua};"]
+}
+
+#
 # SES Receipt Rule
 #
 
