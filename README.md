@@ -29,10 +29,10 @@ Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES
 
 ```hcl
 module "ses_domain" {
-  source = "../../modules/aws-ses-domain"
+  source             = "trussworks/ses-domain/aws"
   domain_name        = "example.com"
   mail_from_domain   = "email.example.com"
-  route53_zone_id    = "Z123456789"
+  route53_zone_id    = "${data.aws_route53_zone.SES_domain.zone_id}"
   from_addresses     = ["email1@example.com", "email2@example.com"]
   dmarc_rua          = "something@example.com"
   receive_s3_bucket  = "S3_bucket_with_write_permissions"
@@ -42,6 +42,10 @@ module "ses_domain" {
 
 resource "aws_ses_receipt_rule_set" "name-of-the-ruleset" {
   rule_set_name = "name-of-the-ruleset"
+}
+
+data "aws_route53_zone" "SES_domain" {
+  name = "example.com"
 }
 ```
 
