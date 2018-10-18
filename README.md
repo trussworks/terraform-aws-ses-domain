@@ -9,7 +9,7 @@ Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES
 * route53 zone id can be obtained by looking up the domain in route53 service
 
 ## Getting Started
-1. Import the module called `ses_domain` and update its source property to `github.com/trussworks/terraform-aws-ses-domain` and run `terrafrom init`
+1. Import the module called `ses_domain` and update its source property to `trussworks/ses-domain/aws` and run `terrafrom init`
 2. The next step is to configure the module with [minimum values](#usage) for SES to start working
 3. Once fully configured run `terraform plan` to see the execution plan and `terrafrom apply` to stand up SES
 
