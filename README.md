@@ -37,5 +37,6 @@ module "ses_domain" {
 | receive_s3_prefix | The key prefix of the S3 bucket to store received emails. | string | - | yes |
 | route53_zone_id | Route53 host zone ID to enable SES. | string | - | yes |
 | ses_rule_set | Name of the SES rule set to associate rules with. | string | - | yes |
+| enable_incoming_email | Control whether or not to enable incoming emails through an MX record | string | `true` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
