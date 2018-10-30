@@ -113,7 +113,7 @@ resource "aws_route53_record" "mx_send_mail_from" {
 
 # Receiving MX Record
 resource "aws_route53_record" "mx_receive" {
-  count = "${var.enable_incoming_email ? 1 : 0}"
+  count   = "${var.enable_incoming_email ? 1 : 0}"
   zone_id = "${var.route53_zone_id}"
   name    = "${var.domain_name}"
   type    = "MX"
@@ -138,6 +138,7 @@ resource "aws_route53_record" "txt_dmarc" {
 
 resource "aws_ses_receipt_rule" "main" {
   name          = "${format("%s-s3-rule", local.dash_domain)}"
+  count         = "${var.enable_incoming_email ? 1 : 0}"
   rule_set_name = "${var.ses_rule_set}"
   recipients    = ["${var.from_addresses}"]
   enabled       = true
