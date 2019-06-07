@@ -138,7 +138,7 @@ resource "aws_route53_record" "txt_dmarc" {
 resource "aws_ses_receipt_rule" "main" {
   name          = "${format("%s-s3-rule", local.dash_domain)}"
   rule_set_name = "${var.ses_rule_set}"
-  recipients    = ["${var.from_addresses}"]
+  recipients    = "${var.from_addresses}"
   enabled       = true
   scan_enabled  = true
 
