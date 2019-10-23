@@ -54,17 +54,17 @@ data "aws_route53_zone" "SES_domain" {
 
 ## Inputs
 
-| Name | Description | Type | Default | Required | Notes |
-|------|-------------|:----:|:-----:|:-----:|:-----:|
-| dmarc_rua | Email address for capturing DMARC aggregate reports. | string | - | yes | |
-| domain_name | The domain name to configure SES. | string | - | yes | |
-| enable_verification | Control whether or not to verify SES DNS records. | string | `true` | no | |
-| from_addresses | List of email addresses to catch bounces and rejections | list | - | yes | |
-| mail_from_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | string | - | yes | |
-| receive_s3_bucket | Name of the S3 bucket to store received emails. | string | - | *yes | *value can be empty string if `enable_incoming_email` is set to false|
-| receive_s3_prefix | The key prefix of the S3 bucket to store received emails. | string | - | *yes | *value can be empty string if `enable_incoming_email` is set to false|
-| route53_zone_id | Route53 host zone ID to enable SES. | string | - | yes |
-| ses_rule_set | Name of the SES rule set to associate rules with. | string | - | *yes | *value can be empty string if `enable_incoming_email` is set to false|
-| enable_incoming_email | Control whether or not to enable incoming emails through an MX record | string | `true` | no | |
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| dmarc\_rua | Email address for capturing DMARC aggregate reports. | string | n/a | yes |
+| domain\_name | The domain name to configure SES. | string | n/a | yes |
+| enable\_incoming\_email | Control whether or not to handle incoming emails | string | `"true"` | no |
+| enable\_verification | Control whether or not to verify SES DNS records. | string | `"true"` | no |
+| from\_addresses | List of email addresses to catch bounces and rejections | list | n/a | yes |
+| mail\_from\_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | string | n/a | yes |
+| receive\_s3\_bucket | Name of the S3 bucket to store received emails. | string | n/a | yes |
+| receive\_s3\_prefix | The key prefix of the S3 bucket to store received emails. | string | n/a | yes |
+| route53\_zone\_id | Route53 host zone ID to enable SES. | string | n/a | yes |
+| ses\_rule\_set | Name of the SES rule set to associate rules with. | string | n/a | yes |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
