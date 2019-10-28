@@ -1,5 +1,5 @@
 /**
- * Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES)
+ * Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES).
  *
  * ## Prerequisites
  *
