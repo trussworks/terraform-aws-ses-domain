@@ -1,47 +1,47 @@
 variable "dmarc_rua" {
   description = "Email address for capturing DMARC aggregate reports."
-  type        = "string"
+  type        = string
 }
 
 variable "domain_name" {
   description = "The domain name to configure SES."
-  type        = "string"
+  type        = string
 }
 
 variable "enable_verification" {
   description = "Control whether or not to verify SES DNS records."
-  type        = "string"
+  type        = string
   default     = true
 }
 
 variable "from_addresses" {
   description = "List of email addresses to catch bounces and rejections"
-  type        = "list"
+  type        = list(string)
 }
 
 variable "mail_from_domain" {
   description = " Subdomain (of the route53 zone) which is to be used as MAIL FROM address"
-  type        = "string"
+  type        = string
 }
 
 variable "receive_s3_bucket" {
   description = "Name of the S3 bucket to store received emails."
-  type        = "string"
+  type        = string
 }
 
 variable "receive_s3_prefix" {
   description = "The key prefix of the S3 bucket to store received emails."
-  type        = "string"
+  type        = string
 }
 
 variable "route53_zone_id" {
   description = "Route53 host zone ID to enable SES."
-  type        = "string"
+  type        = string
 }
 
 variable "ses_rule_set" {
   description = "Name of the SES rule set to associate rules with."
-  type        = "string"
+  type        = string
 }
 
 variable "enable_incoming_email" {
