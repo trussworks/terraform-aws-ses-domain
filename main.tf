@@ -35,11 +35,11 @@
  *   source             = "trussworks/ses-domain/aws"
  *   domain_name        = "example.com"
  *   mail_from_domain   = "email.example.com"
- *   route53_zone_id    = "${data.aws_route53_zone.SES_domain.zone_id}"
+ *   route53_zone_id    = data.aws_route53_zone.SES_domain.zone_id
  *   from_addresses     = ["email1@example.com", "email2@example.com"]
  *   dmarc_rua          = "something@example.com"
  *   receive_s3_bucket  = "S3_bucket_with_write_permissions"
- *   receive_s3_prefix   = "path_to_store_recieved_emails"
+ *   receive_s3_prefix  = "path_to_store_recieved_emails"
  *   ses_rule_set       = "name-of-the-ruleset"
  * }
  *
@@ -147,7 +147,7 @@ resource "aws_route53_record" "mx_send_mail_from" {
 
 # Receiving MX Record
 resource "aws_route53_record" "mx_receive" {
-  count   = "${var.enable_incoming_email ? 1 : 0}"
+  count   = var.enable_incoming_email ? 1 : 0
   name    = var.domain_name
   zone_id = var.route53_zone_id
   type    = "MX"
@@ -172,7 +172,7 @@ resource "aws_route53_record" "txt_dmarc" {
 
 resource "aws_ses_receipt_rule" "main" {
   name          = format("%s-s3-rule", local.dash_domain)
-  count         = "${var.enable_incoming_email ? 1 : 0}"
+  count         = var.enable_incoming_email ? 1 : 0
   rule_set_name = var.ses_rule_set
   recipients    = var.from_addresses
   enabled       = true
