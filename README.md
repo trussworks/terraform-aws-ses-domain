@@ -73,4 +73,10 @@ data "aws_route53_zone" "SES_domain" {
 | route53\_zone\_id | Route53 host zone ID to enable SES. | string | n/a | yes |
 | ses\_rule\_set | Name of the SES rule set to associate rules with. | string | n/a | yes |
 
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| ses\_identity\_arn | SES identity ARN. |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
