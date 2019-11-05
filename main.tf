@@ -126,6 +126,7 @@ resource "aws_route53_record" "spf_mail_from" {
 }
 
 resource "aws_route53_record" "spf_domain" {
+  count   = var.enable_spf_record ? 1 : 0
   zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = "TXT"

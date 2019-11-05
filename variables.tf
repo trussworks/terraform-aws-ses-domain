@@ -46,6 +46,12 @@ variable "ses_rule_set" {
 
 variable "enable_incoming_email" {
   description = "Control whether or not to handle incoming emails"
-  type        = "string"
+  type        = bool
+  default     = true
+}
+
+variable "enable_spf_record" {
+  description = "Control whether or not to create SPF record"
+  type        = bool
   default     = true
 }
