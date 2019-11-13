@@ -72,6 +72,7 @@ data "aws_route53_zone" "SES_domain" {
 | receive\_s3\_prefix | The key prefix of the S3 bucket to store received emails. | string | n/a | yes |
 | route53\_zone\_id | Route53 host zone ID to enable SES. | string | n/a | yes |
 | ses\_rule\_set | Name of the SES rule set to associate rules with. | string | n/a | yes |
+| custom\_spf | For those needing more than just the Amazon SPF. The ability to override and take-control. | string | `"v=spf1 include:amazonses.com -all"` | no |
 
 ## Outputs
 

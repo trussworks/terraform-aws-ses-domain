@@ -18,7 +18,7 @@
  * Creates the following resources:
  *
  * * MX record pointing to AWS's SMTP endpoint
- * * TXT record for SPF validation
+ * * TXT record(s) for SPF validation
  * * Custom MAIL FROM domain
  * * CNAME records for DKIM verification
  * * SES Verfication for the domain
@@ -122,7 +122,7 @@ resource "aws_route53_record" "spf_mail_from" {
   name    = aws_ses_domain_mail_from.main.mail_from_domain
   type    = "TXT"
   ttl     = "600"
-  records = ["v=spf1 include:amazonses.com -all"]
+  records = ["${var.custom_spf}"]
 }
 
 resource "aws_route53_record" "spf_domain" {
@@ -130,7 +130,7 @@ resource "aws_route53_record" "spf_domain" {
   name    = var.domain_name
   type    = "TXT"
   ttl     = "600"
-  records = ["v=spf1 include:amazonses.com -all"]
+  records = ["${var.custom_spf}"]
 }
 
 # Sending MX Record
