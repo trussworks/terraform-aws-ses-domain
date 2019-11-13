@@ -49,3 +49,10 @@ variable "enable_incoming_email" {
   type        = "string"
   default     = true
 }
+
+variable "custom_spf" {
+  description = "If you use other third-party email services, you might use this to ensure you only have a single DNS SPF record"
+  type        = "string"
+  default     = "v=spf1 include:amazonses.com -all"
+}
+
