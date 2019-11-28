@@ -44,7 +44,7 @@ module "ses_domain" {
   from_addresses     = ["email1@example.com", "email2@example.com"]
   dmarc_rua          = "something@example.com"
   receive_s3_bucket  = "S3_bucket_with_write_permissions"
-  receive_s3_prefix  = "path_to_store_recieved_emails"
+  receive_s3_prefix  = "path_to_store_received_emails"
   ses_rule_set       = "name-of-the-ruleset"
 }
 
