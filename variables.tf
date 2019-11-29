@@ -49,3 +49,9 @@ variable "enable_incoming_email" {
   type        = "string"
   default     = true
 }
+
+variable "enable_spf_record" {
+  description = "Control whether or not to set SPF records."
+  type        = bool
+  default     = true
+}
