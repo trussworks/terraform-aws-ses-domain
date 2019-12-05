@@ -11,7 +11,7 @@ import (
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
 
-func TestTerraformAwsConfig(t *testing.T) {
+func TestTerraformSESDomain(t *testing.T) {
 	t.Parallel()
 
 	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/simple")
