@@ -35,16 +35,18 @@ Terraform 0.11. Pin module version to ~> 1.0.2. Submit pull-requests to terrafor
 
 ## Usage
 
+See [examples](examples/) for functional examples on how to use this module.
+
 ```hcl
 module "ses_domain" {
   source             = "trussworks/ses-domain/aws"
   domain_name        = "example.com"
   mail_from_domain   = "email.example.com"
-  route53_zone_id    = data.aws_route53_zone.SES_domain.zone_id
+  route53_zone_id    = data.aws_route53_zone.ses_domain.zone_id
   from_addresses     = ["email1@example.com", "email2@example.com"]
   dmarc_rua          = "something@example.com"
   receive_s3_bucket  = "S3_bucket_with_write_permissions"
-  receive_s3_prefix  = "path_to_store_recieved_emails"
+  receive_s3_prefix  = "path_to_store_received_emails"
   ses_rule_set       = "name-of-the-ruleset"
 }
 
@@ -80,3 +82,27 @@ data "aws_route53_zone" "SES_domain" {
 | ses\_identity\_arn | SES identity ARN. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Developer Setup
+
+Install dependencies (macOS)
+
+```shell
+brew install pre-commit go terraform terraform-docs
+```
+
+### Testing
+
+[Terratest](https://github.com/gruntwork-io/terratest) is being used for
+automated testing with this module. Tests in the `test` folder can be run
+locally by running the following command:
+
+```shell
+make test
+```
+
+Or with aws-vault:
+
+```shell
+AWS_VAULT_KEYCHAIN_NAME=<NAME> aws-vault exec <PROFILE> -- make test
+```
