@@ -18,9 +18,8 @@ resource "aws_ses_receipt_rule_set" "main" {
 }
 
 resource "aws_ses_active_receipt_rule_set" "main" {
-  rule_set_name = var.test_name
+  rule_set_name = aws_ses_receipt_rule_set.main.rule_set_name
 
-  depends_on = [aws_ses_receipt_rule_set.main]
 }
 
 #
@@ -95,7 +94,7 @@ resource "aws_route53_record" "temp_domain_ns_records" {
   type    = "NS"
   ttl     = "30"
 
-  records = aws_route53_zone.temp_domain.name_servers.*
+  records = aws_route53_zone.temp_domain.name_servers
 }
 
 #
@@ -116,6 +115,5 @@ module "ses_domain" {
   receive_s3_bucket = module.ses_bucket.id
   receive_s3_prefix = local.ses_bucket_prefix
 
-  ses_rule_set = var.test_name
+  ses_rule_set = aws_ses_receipt_rule_set.main.rule_set_name
 }
-
