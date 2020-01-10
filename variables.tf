@@ -46,7 +46,7 @@ variable "ses_rule_set" {
 
 variable "enable_incoming_email" {
   description = "Control whether or not to handle incoming emails"
-  type        = "string"
+  type        = bool
   default     = true
 }
 
