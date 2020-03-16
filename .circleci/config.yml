@@ -1,25 +1,9 @@
-version: 2
+version: 2.1
 
 references:
-  circleci_docker_primary: &circleci_docker_primary trussworks/circleci-docker-primary:40076395a6e6a349f92caa92c4de614e105fe672
+  circleci_docker_primary: &circleci_docker_primary trussworks/circleci-docker-primary:e66fbea875bcb788b29b1b5f59142e8231961ec5
 
 jobs:
-  validate:
-    docker:
-      - image: *circleci_docker_primary
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
-      - run:
-          name: Run pre-commit tests
-          command: make pre_commit_tests
-      - save_cache:
-          key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
-          paths:
-            - ~/.cache
-
   terratest:
     docker:
       - image: *circleci_docker_primary
@@ -27,9 +11,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
+            - pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
             - go-mod-sources-v1-{{ checksum "go.sum" }}
       - run:
-          name: Assume role and run terratest
+          name: Assume role, run pre-commit and run terratest
           command: |
             temp_role=$(aws sts assume-role \
                     --role-arn arn:aws:iam::313564602749:role/circleci \
@@ -39,13 +24,16 @@ jobs:
             export AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken | xargs)
             make test
       - save_cache:
+          key: pre-commit-dot-cache-{{ checksum ".pre-commit-config.yaml" }}
+          paths:
+            - "~/.cache/pre-commit"
+      - save_cache:
           key: go-mod-sources-v1-{{ checksum "go.sum" }}
           paths:
             - "~/go/pkg/mod"
 
 workflows:
-  version: 2
+  version: 2.1
   validate:
     jobs:
-      - validate
       - terratest
