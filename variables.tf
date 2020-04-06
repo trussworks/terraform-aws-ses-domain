@@ -10,12 +10,12 @@ variable "domain_name" {
 
 variable "enable_verification" {
   description = "Control whether or not to verify SES DNS records."
-  type        = string
+  type        = bool
   default     = true
 }
 
 variable "from_addresses" {
-  description = "List of email addresses to catch bounces and rejections"
+  description = "List of email addresses to catch bounces and rejections."
   type        = list(string)
 }
 
@@ -45,7 +45,13 @@ variable "ses_rule_set" {
 }
 
 variable "enable_incoming_email" {
-  description = "Control whether or not to handle incoming emails"
-  type        = string
+  description = "Control whether or not to handle incoming emails."
+  type        = bool
+  default     = true
+}
+
+variable "enable_spf_record" {
+  description = "Control whether or not to set SPF records."
+  type        = bool
   default     = true
 }

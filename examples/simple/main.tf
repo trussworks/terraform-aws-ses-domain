@@ -96,6 +96,14 @@ resource "aws_route53_record" "temp_domain_ns_records" {
   records = aws_route53_zone.temp_domain.name_servers
 }
 
+# resource "aws_route53_record" "temp_spf" {
+#   zone_id = data.aws_route53_zone.infra_test_truss_coffee.zone_id
+#   name    = var.test_name
+#   type    = "TXT"
+#   ttl     = "600"
+#   records = ["v=spf1 include:_spf.google.com include:servers.mcsv.net ~all"]
+# }
+
 #
 # SES Domain
 #
@@ -113,6 +121,7 @@ module "ses_domain" {
 
   receive_s3_bucket = module.ses_bucket.id
   receive_s3_prefix = local.ses_bucket_prefix
+  enable_spf_record = false
 
   ses_rule_set = aws_ses_receipt_rule_set.main.rule_set_name
 }
