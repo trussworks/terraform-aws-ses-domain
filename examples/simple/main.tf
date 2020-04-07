@@ -96,13 +96,13 @@ resource "aws_route53_record" "temp_domain_ns_records" {
   records = aws_route53_zone.temp_domain.name_servers
 }
 
-# resource "aws_route53_record" "temp_spf" {
-#   zone_id = data.aws_route53_zone.infra_test_truss_coffee.zone_id
-#   name    = var.test_name
-#   type    = "TXT"
-#   ttl     = "600"
-#   records = ["v=spf1 include:_spf.google.com include:servers.mcsv.net ~all"]
-# }
+resource "aws_route53_record" "temp_spf" {
+  zone_id = data.aws_route53_zone.infra_test_truss_coffee.zone_id
+  name    = var.test_name
+  type    = "TXT"
+  ttl     = "600"
+  records = ["v=spf1 include:_spf.google.com include:servers.mcsv.net ~all"]
+}
 
 #
 # SES Domain
