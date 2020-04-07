@@ -7,10 +7,11 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/aws"
-	"github.com/gruntwork-io/terratest/modules/logger"
+	"github.com/gruntwork-io/terratest/modules/collections"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestTerraformSESDomain(t *testing.T) {
@@ -40,12 +41,8 @@ func TestTerraformSESDomain(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	logger.Log(t, testDomain)
-
 	txtrecords, _ := net.LookupTXT(testDomain)
-	logger.Log(t, txtrecords)
 
-	for _, txt := range txtrecords {
-		logger.Log(t, txt)
-	}
+	assert.True(t, collections.ListContains(txtrecords, "v=spf1 include:_spf.google.com include:servers.mcsv.net ~all"))
+	assert.False(t, collections.ListContains(txtrecords, "v=spf1 include:amazonses.com -all"))
 }

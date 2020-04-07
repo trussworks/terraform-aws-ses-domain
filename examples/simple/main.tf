@@ -97,8 +97,8 @@ resource "aws_route53_record" "temp_domain_ns_records" {
 }
 
 resource "aws_route53_record" "temp_spf" {
-  zone_id = data.aws_route53_zone.infra_test_truss_coffee.zone_id
-  name    = var.test_name
+  zone_id = aws_route53_zone.temp_domain.zone_id
+  name    = local.temp_domain
   type    = "TXT"
   ttl     = "600"
   records = ["v=spf1 include:_spf.google.com include:servers.mcsv.net ~all"]
