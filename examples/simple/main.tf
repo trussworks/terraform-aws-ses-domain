@@ -97,6 +97,7 @@ resource "aws_route53_record" "temp_domain_ns_records" {
 }
 
 resource "aws_route53_record" "temp_spf" {
+  count   = var.enable_spf_record ? 0 : 1
   zone_id = aws_route53_zone.temp_domain.zone_id
   name    = local.temp_domain
   type    = "TXT"
