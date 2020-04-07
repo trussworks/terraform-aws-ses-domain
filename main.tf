@@ -63,21 +63,21 @@ resource "aws_ses_domain_mail_from" "main" {
 
 # SPF validation record
 resource "aws_route53_record" "spf_mail_from" {
+  count   = var.enable_spf_record ? 1 : 0
   zone_id = var.route53_zone_id
   name    = aws_ses_domain_mail_from.main.mail_from_domain
   type    = "TXT"
   ttl     = "600"
   records = ["v=spf1 include:amazonses.com -all"]
-  count   = var.enable_spf_record ? 1 : 0
 }
 
 resource "aws_route53_record" "spf_domain" {
+  count   = var.enable_spf_record ? 1 : 0
   zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = "TXT"
   ttl     = "600"
   records = ["v=spf1 include:amazonses.com -all"]
-  count   = var.enable_spf_record ? 1 : 0
 }
 
 # Sending MX Record

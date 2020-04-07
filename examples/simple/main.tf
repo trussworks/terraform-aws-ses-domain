@@ -121,7 +121,7 @@ module "ses_domain" {
 
   receive_s3_bucket = module.ses_bucket.id
   receive_s3_prefix = local.ses_bucket_prefix
-  enable_spf_record = false
+  enable_spf_record = var.enable_spf_record
 
   ses_rule_set = aws_ses_receipt_rule_set.main.rule_set_name
 }
