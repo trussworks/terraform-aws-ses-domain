@@ -2,11 +2,6 @@ variable "dmarc_p" {
   description = "DMARC Policy for organizational domains (none, quarantine, reject)."
   type        = string
   default     = "none"
-
-  validation {
-    condition     = var.dmarc_p == "none" || var.dmarc_p == "quarantine" || var.dmarc_p == "reject"
-    error_message = "This module only supports only policy domains none, quarantine, and reject."
-  }
 }
 
 variable "dmarc_rua" {
