@@ -110,7 +110,7 @@ resource "aws_route53_record" "txt_dmarc" {
   name    = "_dmarc.${var.domain_name}"
   type    = "TXT"
   ttl     = "600"
-  records = ["v=DMARC1; p=none; rua=mailto:${var.dmarc_rua};"]
+  records = ["v=DMARC1; p=${var.dmarc_p}; rua=mailto:${var.dmarc_rua};"]
 }
 
 #

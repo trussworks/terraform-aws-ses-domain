@@ -1,5 +1,11 @@
+variable "dmarc_p" {
+  description = "DMARC Policy for organizational domains (none, quarantine, reject)."
+  type        = string
+  default     = "none"
+}
+
 variable "dmarc_rua" {
-  description = "Email address for capturing DMARC aggregate reports."
+  description = "DMARC Reporting URI of aggregate reports, expects an email address."
   type        = string
 }
 

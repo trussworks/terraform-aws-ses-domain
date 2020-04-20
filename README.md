@@ -76,7 +76,8 @@ data "aws_route53_zone" "SES_domain" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| dmarc\_rua | Email address for capturing DMARC aggregate reports. | `string` | n/a | yes |
+| dmarc\_p | DMARC Policy for organizational domains (none, quarantine, reject). | `string` | `"none"` | no |
+| dmarc\_rua | DMARC Reporting URI of aggregate reports, expects an email address. | `string` | n/a | yes |
 | domain\_name | The domain name to configure SES. | `string` | n/a | yes |
 | enable\_incoming\_email | Control whether or not to handle incoming emails. | `bool` | `true` | no |
 | enable\_spf\_record | Control whether or not to set SPF records. | `bool` | `true` | no |
