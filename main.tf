@@ -40,7 +40,8 @@ resource "aws_ses_domain_dkim" "main" {
 }
 
 resource "aws_route53_record" "dkim" {
-  count   = 3
+  count = 3
+
   zone_id = var.route53_zone_id
   name = format(
     "%s._domainkey.%s",
@@ -63,7 +64,8 @@ resource "aws_ses_domain_mail_from" "main" {
 
 # SPF validation record
 resource "aws_route53_record" "spf_mail_from" {
-  count   = var.enable_spf_record ? 1 : 0
+  count = var.enable_spf_record ? 1 : 0
+
   zone_id = var.route53_zone_id
   name    = aws_ses_domain_mail_from.main.mail_from_domain
   type    = "TXT"
@@ -72,7 +74,8 @@ resource "aws_route53_record" "spf_mail_from" {
 }
 
 resource "aws_route53_record" "spf_domain" {
-  count   = var.enable_spf_record ? 1 : 0
+  count = var.enable_spf_record ? 1 : 0
+
   zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = "TXT"
@@ -94,7 +97,8 @@ resource "aws_route53_record" "mx_send_mail_from" {
 
 # Receiving MX Record
 resource "aws_route53_record" "mx_receive" {
-  count   = var.enable_incoming_email ? 1 : 0
+  count = var.enable_incoming_email ? 1 : 0
+
   name    = var.domain_name
   zone_id = var.route53_zone_id
   type    = "MX"
@@ -118,8 +122,9 @@ resource "aws_route53_record" "txt_dmarc" {
 #
 
 resource "aws_ses_receipt_rule" "main" {
+  count = var.enable_incoming_email ? 1 : 0
+
   name          = format("%s-s3-rule", local.dash_domain)
-  count         = var.enable_incoming_email ? 1 : 0
   rule_set_name = var.ses_rule_set
   recipients    = var.from_addresses
   enabled       = true
