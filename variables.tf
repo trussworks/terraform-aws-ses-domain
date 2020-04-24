@@ -31,13 +31,15 @@ variable "mail_from_domain" {
 }
 
 variable "receive_s3_bucket" {
-  description = "Name of the S3 bucket to store received emails."
+  description = "Name of the S3 bucket to store received emails (required if enable_incoming_email is true)."
   type        = string
+  default     = ""
 }
 
 variable "receive_s3_prefix" {
-  description = "The key prefix of the S3 bucket to store received emails."
+  description = "The key prefix of the S3 bucket to store received emails (required if enable_incoming_email is true)."
   type        = string
+  default     = ""
 }
 
 variable "route53_zone_id" {
