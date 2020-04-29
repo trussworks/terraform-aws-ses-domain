@@ -1,5 +1,6 @@
 data "aws_caller_identity" "current" {}
 data "aws_iam_account_alias" "current" {}
+data "aws_partition" "current" {}
 
 #
 # SES Ruleset
@@ -51,14 +52,32 @@ data "aws_iam_policy_document" "s3_allow_ses_puts" {
   }
 }
 
-module "ses_bucket" {
-  source  = "trussworks/s3-private-bucket/aws"
-  version = "~> 2"
+resource "aws_s3_bucket" "temp_bucket" {
+  bucket        = var.ses_bucket
+  acl           = "private"
+  force_destroy = true
+  policy        = data.aws_iam_policy_document.s3_allow_ses_puts.json
 
-  bucket                   = var.ses_bucket
-  use_account_alias_prefix = false
-  custom_bucket_policy     = data.aws_iam_policy_document.s3_allow_ses_puts.json
-  logging_bucket           = module.s3_logs.aws_logs_bucket
+  logging {
+    target_bucket = module.s3_logs.aws_logs_bucket
+    target_prefix = "s3/${var.ses_bucket}/"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "public_access_block" {
+  bucket = aws_s3_bucket.temp_bucket.id
+
+  # Block new public ACLs and uploading public objects
+  block_public_acls = true
+
+  # Retroactively remove public access granted through public ACLs
+  ignore_public_acls = true
+
+  # Block new public bucket policies
+  block_public_policy = true
+
+  # Retroactivley block public and cross-account access if bucket has public policies
+  restrict_public_buckets = true
 }
 
 #
@@ -120,7 +139,7 @@ module "ses_domain" {
 
   dmarc_rua = "email@hurts.com"
 
-  receive_s3_bucket = module.ses_bucket.id
+  receive_s3_bucket = aws_s3_bucket.temp_bucket.id
   receive_s3_prefix = local.ses_bucket_prefix
   enable_spf_record = var.enable_spf_record
 
