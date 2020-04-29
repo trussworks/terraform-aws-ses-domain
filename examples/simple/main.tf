@@ -58,12 +58,9 @@ resource "aws_s3_bucket" "temp_bucket" {
   force_destroy = true
   policy        = data.aws_iam_policy_document.s3_allow_ses_puts.json
 
-  dynamic "logging" {
-    for_each = [1]
-    content {
-      target_bucket = module.s3_logs.aws_logs_bucket
-      target_prefix = "s3/${var.ses_bucket}/"
-    }
+  logging {
+    target_bucket = module.s3_logs.aws_logs_bucket
+    target_prefix = "s3/${var.ses_bucket}/"
   }
 }
 
