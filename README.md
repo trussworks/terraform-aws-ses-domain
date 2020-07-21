@@ -82,6 +82,7 @@ data "aws_route53_zone" "SES_domain" {
 | enable\_incoming\_email | Control whether or not to handle incoming emails. | `bool` | `true` | no |
 | enable\_spf\_record | Control whether or not to set SPF records. | `bool` | `true` | no |
 | enable\_verification | Control whether or not to verify SES DNS records. | `bool` | `true` | no |
+| extra\_ses\_records | Extra records to add to the \_amazonses TXT record. | `list(string)` | `[]` | no |
 | from\_addresses | List of email addresses to catch bounces and rejections. | `list(string)` | n/a | yes |
 | mail\_from\_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | `string` | n/a | yes |
 | receive\_s3\_bucket | Name of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
