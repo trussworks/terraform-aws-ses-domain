@@ -28,7 +28,7 @@ resource "aws_route53_record" "ses_verification" {
   name    = "_amazonses.${aws_ses_domain_identity.main.id}"
   type    = "TXT"
   ttl     = "600"
-  records = [aws_ses_domain_identity.main.verification_token]
+  records = concat([aws_ses_domain_identity.main.verification_token], var.extra_ses_records)
 }
 
 #
