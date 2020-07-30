@@ -13,3 +13,8 @@ variable "ses_bucket" {
 variable "enable_spf_record" {
   type = bool
 }
+
+variable "extra_ses_records" {
+  type    = list(string)
+  default = []
+}
