@@ -65,12 +65,13 @@ data "aws_route53_zone" "SES_domain" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12 |
+| aws | ~> 2.70 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.70 |
 
 ## Inputs
 

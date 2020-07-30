@@ -75,3 +75,36 @@ func TestTerraformSESDomainWithSPFDisabled(t *testing.T) {
 	assert.Contains(t, txtrecords, "v=spf1 include:_spf.google.com include:servers.mcsv.net ~all")
 	assert.NotContains(t, txtrecords, "v=spf1 include:amazonses.com -all")
 }
+
+func TestTerraformSESDomainWithExtraSESRecords(t *testing.T) {
+	t.Parallel()
+
+	tempTestFolder := test_structure.CopyTerraformFolderToTemp(t, "../", "examples/simple")
+	testName := fmt.Sprintf("ses-domain-%s", strings.ToLower(random.UniqueId()))
+	testDomain := fmt.Sprintf("_amazonses.%s.infra-test.truss.coffee", testName)
+	sesBucketName := fmt.Sprintf("%s-ses", testName)
+	awsRegion := "us-west-2"
+	extraRecords := []string{"stringThing1.infra-test.truss.coffee", "stringThing2.infra-test.truss.coffee"}
+
+	terraformOptions := &terraform.Options{
+		TerraformDir: tempTestFolder,
+		Vars: map[string]interface{}{
+			"region":            awsRegion,
+			"test_name":         testName,
+			"ses_bucket":        sesBucketName,
+			"enable_spf_record": true,
+			"extra_ses_records": extraRecords,
+		},
+		EnvVars: map[string]string{
+			"AWS_DEFAULT_REGION": awsRegion,
+		},
+	}
+
+	defer terraform.Destroy(t, terraformOptions)
+
+	terraform.InitAndApply(t, terraformOptions)
+
+	txtrecords, _ := net.LookupTXT(testDomain)
+
+	assert.Contains(t, txtrecords, "stringThing1.infra-test.truss.coffee")
+}

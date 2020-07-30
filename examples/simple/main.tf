@@ -142,6 +142,7 @@ module "ses_domain" {
   receive_s3_bucket = aws_s3_bucket.temp_bucket.id
   receive_s3_prefix = local.ses_bucket_prefix
   enable_spf_record = var.enable_spf_record
+  extra_ses_records = var.extra_ses_records
 
   ses_rule_set = aws_ses_receipt_rule_set.main.rule_set_name
 }
