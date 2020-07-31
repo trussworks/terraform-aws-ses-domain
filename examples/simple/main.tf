@@ -86,7 +86,7 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
 
 module "s3_logs" {
   source  = "trussworks/logs/aws"
-  version = "~> 4"
+  version = "~> 8"
 
   s3_bucket_name = "${var.test_name}-logs"
   region         = var.region
