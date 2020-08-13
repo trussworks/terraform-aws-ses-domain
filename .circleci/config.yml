@@ -1,7 +1,7 @@
 version: 2.1
 
 references:
-  circleci_docker_primary: &circleci_docker_primary trussworks/circleci-docker-primary:2f6321ed86ed79bfed23b04dd6dfdbe7bc943fdc
+  circleci_docker_primary: &circleci_docker_primary trussworks/circleci-docker-primary:822fac1c30f3bb7d5d595bed5d2dc86265c4f2f0
 
 jobs:
   terratest:
