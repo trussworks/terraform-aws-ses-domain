@@ -89,7 +89,6 @@ module "s3_logs" {
   version = "~> 8"
 
   s3_bucket_name = "${var.test_name}-logs"
-  region         = var.region
 
   default_allow = false
 }

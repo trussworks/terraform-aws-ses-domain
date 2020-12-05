@@ -24,7 +24,6 @@ func TestTerraformSESDomainWithSPFEnabled(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: tempTestFolder,
 		Vars: map[string]interface{}{
-			"region":            awsRegion,
 			"test_name":         testName,
 			"ses_bucket":        sesBucketName,
 			"enable_spf_record": true,
@@ -56,7 +55,6 @@ func TestTerraformSESDomainWithSPFDisabled(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: tempTestFolder,
 		Vars: map[string]interface{}{
-			"region":            awsRegion,
 			"test_name":         testName,
 			"ses_bucket":        sesBucketName,
 			"enable_spf_record": false,
@@ -89,7 +87,6 @@ func TestTerraformSESDomainWithExtraSESRecords(t *testing.T) {
 	terraformOptions := &terraform.Options{
 		TerraformDir: tempTestFolder,
 		Vars: map[string]interface{}{
-			"region":            awsRegion,
 			"test_name":         testName,
 			"ses_bucket":        sesBucketName,
 			"enable_spf_record": true,
