@@ -24,6 +24,7 @@ resource "aws_ses_domain_identity_verification" "main" {
 }
 
 resource "aws_route53_record" "ses_verification" {
+  count   = var.enable_verification ? 1 : 0
   zone_id = var.route53_zone_id
   name    = "_amazonses.${aws_ses_domain_identity.main.id}"
   type    = "TXT"
