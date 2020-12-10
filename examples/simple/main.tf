@@ -123,6 +123,16 @@ resource "aws_route53_record" "temp_spf" {
   records = ["v=spf1 include:_spf.google.com include:servers.mcsv.net ~all"]
 }
 
+resource "aws_route53_record" "temp_verification" {
+  count   = var.enable_verification ? 0 : 1
+  zone_id = aws_route53_zone.temp_domain.zone_id
+  name    = "_amazonses.${local.temp_domain}"
+  type    = "TXT"
+  ttl     = "600"
+  records = [var.test_name]
+}
+
+
 #
 # SES Domain
 #
@@ -138,10 +148,12 @@ module "ses_domain" {
 
   dmarc_rua = "email@hurts.com"
 
-  receive_s3_bucket = aws_s3_bucket.temp_bucket.id
-  receive_s3_prefix = local.ses_bucket_prefix
-  enable_spf_record = var.enable_spf_record
-  extra_ses_records = var.extra_ses_records
+  receive_s3_bucket   = aws_s3_bucket.temp_bucket.id
+  receive_s3_prefix   = local.ses_bucket_prefix
+  enable_verification = var.enable_verification
+  enable_spf_record   = var.enable_spf_record
+  extra_ses_records   = var.extra_ses_records
+
 
   ses_rule_set = aws_ses_receipt_rule_set.main.rule_set_name
 }
