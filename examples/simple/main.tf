@@ -129,7 +129,7 @@ resource "aws_route53_record" "temp_verification" {
   name    = "_amazonses.${local.temp_domain}"
   type    = "TXT"
   ttl     = "600"
-  records = [var.test_name]
+  records = [module.ses_domain.ses_verification_token]
 }
 
 

@@ -135,6 +135,7 @@ func TestTerraformSESDomainWithNoVerificationRecords(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
+	verificationToken := terraform.Output(t, terraformOptions, "ses_verification_token")
 	txtRecords, _ := net.LookupTXT(testDomain)
-	assert.Contains(t, txtRecords, testName)
+	assert.Contains(t, txtRecords, verificationToken)
 }
