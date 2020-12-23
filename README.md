@@ -29,7 +29,9 @@ Creates the following resources:
 
 ## Terraform Versions
 
-Terraform 0.13. Pin module version to ~> 3.X. Submit pull-requests to master branch.
+Terraform 0.14. Pin module version to ~> 4.X. Submit pull-requests to master branch.
+
+Terraform 0.13. Pin module version to ~> 3.X. Submit pull-requests to terraform013 branch.
 
 Terraform 0.12. Pin module version to ~> 2.X. Submit pull-requests to terraform012 branch.
 
@@ -66,7 +68,7 @@ data "aws_route53_zone" "SES_domain" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.13.0 |
+| terraform | ~> 0.14.0 |
 | aws | ~> 3.0 |
 
 ## Providers
