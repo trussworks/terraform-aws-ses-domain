@@ -24,16 +24,14 @@ Creates the following resources:
 
 ### NOTES
 
-* SES is only available in us-east-1, us-west-2, and eu-west-1
+* SES is only available in a [limited number of AWS Regions](https://docs.aws.amazon.com/general/latest/gr/ses.html).
 * SES out of the box locks the service in development mode; please see this documentation on how to make it production ready. Until the service is in production mode you can only send emails to confirmed email accounts denoted in `from_addresses`
 
 ## Terraform Versions
 
-Terraform 0.13. Pin module version to ~> 3.X. Submit pull-requests to master branch.
+Terraform 0.13 and newer. Pin module version to ~> 3.X. Submit pull-requests to master branch.
 
 Terraform 0.12. Pin module version to ~> 2.X. Submit pull-requests to terraform012 branch.
-
-Terraform 0.11. Pin module version to ~> 1.0.2. Submit pull-requests to terraform011 branch.
 
 ## Usage
 
@@ -66,14 +64,14 @@ data "aws_route53_zone" "SES_domain" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.13.0 |
-| aws | ~> 3.0 |
+| terraform | >= 0.13.0 |
+| aws | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.0 |
+| aws | >= 3.0 |
 
 ## Inputs
 
