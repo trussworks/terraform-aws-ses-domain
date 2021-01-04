@@ -1,6 +1,6 @@
 module github.com/trussworks/terraform-aws-ses-domain
 
-go 1.13
+go 1.15
 
 require (
 	github.com/gruntwork-io/terratest v0.31.2

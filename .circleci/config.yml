@@ -1,7 +1,7 @@
 version: 2.1
 
 references:
-  circleci: &circleci trussworks/circleci:29ab89fdada1f85c5d8fb685a2c71660f0c5f60c
+  circleci: &circleci trussworks/circleci:efb1042e31538677779971798e0912390f699e72
 
 jobs:
   terratest:
