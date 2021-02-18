@@ -42,6 +42,12 @@ variable "receive_s3_prefix" {
   default     = ""
 }
 
+variable "receive_s3_kms_key_arn" {
+  description = "The ARN of the KMS key for S3 objects of received emails (effective if enable_incoming_email is true)."
+  type        = string
+  default     = null
+}
+
 variable "route53_zone_id" {
   description = "Route53 host zone ID to enable SES."
   type        = string

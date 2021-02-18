@@ -136,6 +136,7 @@ resource "aws_ses_receipt_rule" "main" {
 
     bucket_name       = var.receive_s3_bucket
     object_key_prefix = var.receive_s3_prefix
+    kms_key_arn       = var.receive_s3_kms_key_arn
   }
 }
 
