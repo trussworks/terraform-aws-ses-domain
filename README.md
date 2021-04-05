@@ -54,7 +54,7 @@ resource "aws_ses_receipt_rule_set" "name-of-the-ruleset" {
   rule_set_name = "name-of-the-ruleset"
 }
 
-data "aws_route53_zone" "SES_domain" {
+data "aws_route53_zone" "ses_domain" {
   name = "example.com"
 }
 ```
