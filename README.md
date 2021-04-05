@@ -42,7 +42,7 @@ module "ses_domain" {
   source             = "trussworks/ses-domain/aws"
   domain_name        = "example.com"
   mail_from_domain   = "email.example.com"
-  route53_zone_id    = data.aws_route53_zone.SES_domain.zone_id
+  route53_zone_id    = data.aws_route53_zone.ses_domain.zone_id
   from_addresses     = ["email1@example.com", "email2@example.com"]
   dmarc_rua          = "something@example.com"
   receive_s3_bucket  = "S3_bucket_with_write_permissions"
@@ -54,7 +54,7 @@ resource "aws_ses_receipt_rule_set" "name-of-the-ruleset" {
   rule_set_name = "name-of-the-ruleset"
 }
 
-data "aws_route53_zone" "SES_domain" {
+data "aws_route53_zone" "ses_domain" {
   name = "example.com"
 }
 ```
