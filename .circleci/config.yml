@@ -1,4 +1,3 @@
-
 jobs:
   terratest:
     docker:
