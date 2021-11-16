@@ -23,6 +23,7 @@ variable "enable_verification" {
 variable "from_addresses" {
   description = "List of email addresses to catch bounces and rejections."
   type        = list(string)
+  default     = null
 }
 
 variable "mail_from_domain" {
@@ -56,6 +57,7 @@ variable "route53_zone_id" {
 variable "ses_rule_set" {
   description = "Name of the SES rule set to associate rules with."
   type        = string
+  default     = null
 }
 
 variable "enable_incoming_email" {

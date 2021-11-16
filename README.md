@@ -106,13 +106,13 @@ No modules.
 | <a name="input_enable_spf_record"></a> [enable\_spf\_record](#input\_enable\_spf\_record) | Control whether or not to set SPF records. | `bool` | `true` | no |
 | <a name="input_enable_verification"></a> [enable\_verification](#input\_enable\_verification) | Control whether or not to verify SES DNS records. | `bool` | `true` | no |
 | <a name="input_extra_ses_records"></a> [extra\_ses\_records](#input\_extra\_ses\_records) | Extra records to add to the \_amazonses TXT record. | `list(string)` | `[]` | no |
-| <a name="input_from_addresses"></a> [from\_addresses](#input\_from\_addresses) | List of email addresses to catch bounces and rejections. | `list(string)` | n/a | yes |
+| <a name="input_from_addresses"></a> [from\_addresses](#input\_from\_addresses) | List of email addresses to catch bounces and rejections. | `list(string)` | `null` | no |
 | <a name="input_mail_from_domain"></a> [mail\_from\_domain](#input\_mail\_from\_domain) | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | `string` | n/a | yes |
 | <a name="input_receive_s3_bucket"></a> [receive\_s3\_bucket](#input\_receive\_s3\_bucket) | Name of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
 | <a name="input_receive_s3_kms_key_arn"></a> [receive\_s3\_kms\_key\_arn](#input\_receive\_s3\_kms\_key\_arn) | The ARN of the KMS key for S3 objects of received emails (effective if enable\_incoming\_email is true). | `string` | `null` | no |
 | <a name="input_receive_s3_prefix"></a> [receive\_s3\_prefix](#input\_receive\_s3\_prefix) | The key prefix of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
 | <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 host zone ID to enable SES. | `string` | n/a | yes |
-| <a name="input_ses_rule_set"></a> [ses\_rule\_set](#input\_ses\_rule\_set) | Name of the SES rule set to associate rules with. | `string` | n/a | yes |
+| <a name="input_ses_rule_set"></a> [ses\_rule\_set](#input\_ses\_rule\_set) | Name of the SES rule set to associate rules with. | `string` | `null` | no |
 
 ## Outputs
 
