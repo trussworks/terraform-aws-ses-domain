@@ -32,7 +32,7 @@ variable "addresses" {
 }
 
 variable "enable_incoming_email" {
-  description = "Boolean value of weather incoming email should be enabled ornot"
+  description = "Boolean value of weather incoming email should be enabled or not"
   type        = bool
   default     = true
 }
