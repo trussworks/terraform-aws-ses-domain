@@ -143,7 +143,9 @@ module "ses_domain" {
   domain_name     = local.temp_domain
   route53_zone_id = aws_route53_zone.temp_domain.zone_id
 
-  from_addresses   = ["no-reply@${local.temp_domain}"]
+  enable_incoming_email = var.enable_incoming_email
+
+  from_addresses   = [var.addresses]
   mail_from_domain = "email.${local.temp_domain}"
 
   dmarc_rua = "email@hurts.com"
@@ -154,6 +156,5 @@ module "ses_domain" {
   enable_spf_record   = var.enable_spf_record
   extra_ses_records   = var.extra_ses_records
 
-
-  ses_rule_set = aws_ses_receipt_rule_set.main.rule_set_name
+  ses_rule_set = var.rule_set
 }
