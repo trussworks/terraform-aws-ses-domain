@@ -139,4 +139,3 @@ resource "aws_ses_receipt_rule" "main" {
     kms_key_arn       = var.receive_s3_kms_key_arn
   }
 }
-

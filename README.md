@@ -64,14 +64,14 @@ data "aws_route53_zone" "ses_domain" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.0 |
+| terraform | >= 0.13.0 |
+| aws | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.0 |
+| aws | >= 3.0 |
 
 ## Modules
 
@@ -99,27 +99,27 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_dmarc_p"></a> [dmarc\_p](#input\_dmarc\_p) | DMARC Policy for organizational domains (none, quarantine, reject). | `string` | `"none"` | no |
-| <a name="input_dmarc_rua"></a> [dmarc\_rua](#input\_dmarc\_rua) | DMARC Reporting URI of aggregate reports, expects an email address. | `string` | n/a | yes |
-| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name to configure SES. | `string` | n/a | yes |
-| <a name="input_enable_incoming_email"></a> [enable\_incoming\_email](#input\_enable\_incoming\_email) | Control whether or not to handle incoming emails. | `bool` | `true` | no |
-| <a name="input_enable_spf_record"></a> [enable\_spf\_record](#input\_enable\_spf\_record) | Control whether or not to set SPF records. | `bool` | `true` | no |
-| <a name="input_enable_verification"></a> [enable\_verification](#input\_enable\_verification) | Control whether or not to verify SES DNS records. | `bool` | `true` | no |
-| <a name="input_extra_ses_records"></a> [extra\_ses\_records](#input\_extra\_ses\_records) | Extra records to add to the \_amazonses TXT record. | `list(string)` | `[]` | no |
-| <a name="input_from_addresses"></a> [from\_addresses](#input\_from\_addresses) | List of email addresses to catch bounces and rejections. | `list(string)` | `null` | no |
-| <a name="input_mail_from_domain"></a> [mail\_from\_domain](#input\_mail\_from\_domain) | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | `string` | n/a | yes |
-| <a name="input_receive_s3_bucket"></a> [receive\_s3\_bucket](#input\_receive\_s3\_bucket) | Name of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
-| <a name="input_receive_s3_kms_key_arn"></a> [receive\_s3\_kms\_key\_arn](#input\_receive\_s3\_kms\_key\_arn) | The ARN of the KMS key for S3 objects of received emails (effective if enable\_incoming\_email is true). | `string` | `null` | no |
-| <a name="input_receive_s3_prefix"></a> [receive\_s3\_prefix](#input\_receive\_s3\_prefix) | The key prefix of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
-| <a name="input_route53_zone_id"></a> [route53\_zone\_id](#input\_route53\_zone\_id) | Route53 host zone ID to enable SES. | `string` | n/a | yes |
-| <a name="input_ses_rule_set"></a> [ses\_rule\_set](#input\_ses\_rule\_set) | Name of the SES rule set to associate rules with. | `string` | `null` | no |
+| dmarc\_p | DMARC Policy for organizational domains (none, quarantine, reject). | `string` | `"none"` | no |
+| dmarc\_rua | DMARC Reporting URI of aggregate reports, expects an email address. | `string` | n/a | yes |
+| domain\_name | The domain name to configure SES. | `string` | n/a | yes |
+| enable\_incoming\_email | Control whether or not to handle incoming emails. | `bool` | `true` | no |
+| enable\_spf\_record | Control whether or not to set SPF records. | `bool` | `true` | no |
+| enable\_verification | Control whether or not to verify SES DNS records. | `bool` | `true` | no |
+| extra\_ses\_records | Extra records to add to the \_amazonses TXT record. | `list(string)` | `[]` | no |
+| from\_addresses | List of email addresses to catch bounces and rejections. | `list(string)` | `null` | no |
+| mail\_from\_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | `string` | n/a | yes |
+| receive\_s3\_bucket | Name of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
+| receive\_s3\_kms\_key\_arn | The ARN of the KMS key for S3 objects of received emails (effective if enable\_incoming\_email is true). | `string` | `null` | no |
+| receive\_s3\_prefix | The key prefix of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
+| route53\_zone\_id | Route53 host zone ID to enable SES. | `string` | n/a | yes |
+| ses\_rule\_set | Name of the SES rule set to associate rules with. | `string` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_ses_identity_arn"></a> [ses\_identity\_arn](#output\_ses\_identity\_arn) | SES identity ARN. |
-| <a name="output_ses_verification_token"></a> [ses\_verification\_token](#output\_ses\_verification\_token) | A code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorised SES to act on their behalf. |
+| ses\_identity\_arn | SES identity ARN. |
+| ses\_verification\_token | A code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorised SES to act on their behalf. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Developer Setup
