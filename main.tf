@@ -111,6 +111,8 @@ resource "aws_route53_record" "mx_receive" {
 # DMARC TXT Record
 #
 resource "aws_route53_record" "txt_dmarc" {
+  count = var.enable_dmarc ? 1 : 0
+
   zone_id = var.route53_zone_id
   name    = "_dmarc.${var.domain_name}"
   type    = "TXT"
