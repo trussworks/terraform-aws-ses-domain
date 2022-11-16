@@ -57,7 +57,6 @@ variable "route53_zone_id" {
 variable "ses_rule_set" {
   description = "Name of the SES rule set to associate rules with."
   type        = string
-  default     = null
 }
 
 variable "enable_incoming_email" {

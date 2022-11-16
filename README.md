@@ -112,7 +112,7 @@ No modules.
 | receive\_s3\_kms\_key\_arn | The ARN of the KMS key for S3 objects of received emails (effective if enable\_incoming\_email is true). | `string` | `null` | no |
 | receive\_s3\_prefix | The key prefix of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |
 | route53\_zone\_id | Route53 host zone ID to enable SES. | `string` | n/a | yes |
-| ses\_rule\_set | Name of the SES rule set to associate rules with. | `string` | `null` | no |
+| ses\_rule\_set | Name of the SES rule set to associate rules with. | `string` | n/a | yes |
 
 ## Outputs
 
