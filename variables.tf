@@ -20,6 +20,12 @@ variable "enable_verification" {
   default     = true
 }
 
+variable "enable_dmarc" {
+  description = "Control whether to create DMARC TXT record."
+  type        = bool
+  default     = true
+}
+
 variable "from_addresses" {
   description = "List of email addresses to catch bounces and rejections."
   type        = list(string)
