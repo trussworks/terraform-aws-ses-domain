@@ -2,11 +2,11 @@ Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES
 
 ## Prerequisites
 
-* Ensure [terraform](https://www.terraform.io/intro/getting-started/install.html) is installed
-* Ensure domain is registered in [route53](https://aws.amazon.com/route53/)
-* Ensure an s3 bucket exists and SES has write permissions to it
-* If you have an existing rule set you can skip creating the dependent resource
-* Route53 zone id can be obtained by looking up the domain in route53 service
+- Ensure [terraform](https://www.terraform.io/intro/getting-started/install.html) is installed
+- Ensure domain is registered in [route53](https://aws.amazon.com/route53/)
+- Ensure an s3 bucket exists and SES has write permissions to it
+- If you have an existing rule set you can skip creating the dependent resource
+- Route53 zone id can be obtained by looking up the domain in route53 service
 
 ## Getting Started
 
@@ -16,16 +16,16 @@ Configures a domain hosted on Route53 to work with AWS Simple Email Service (SES
 
 Creates the following resources:
 
-* MX record pointing to AWS's SMTP endpoint
-* TXT record for SPF validation
-* Custom MAIL FROM domain
-* CNAME records for DKIM verification
-* SES Verfication for the domain
+- MX record pointing to AWS's SMTP endpoint
+- TXT record for SPF validation
+- Custom MAIL FROM domain
+- CNAME records for DKIM verification
+- SES Verfication for the domain
 
 ### NOTES
 
-* SES is only available in a [limited number of AWS Regions](https://docs.aws.amazon.com/general/latest/gr/ses.html).
-* SES out of the box locks the service in development mode; please see this documentation on how to make it production ready. Until the service is in production mode you can only send emails to confirmed email accounts denoted in `from_addresses`
+- SES is only available in a [limited number of AWS Regions](https://docs.aws.amazon.com/general/latest/gr/ses.html).
+- SES out of the box locks the service in development mode; please see this documentation on how to make it production ready. Until the service is in production mode you can only send emails to confirmed email accounts denoted in `from_addresses`
 
 ## Terraform Versions
 
@@ -129,20 +129,4 @@ Install dependencies (macOS)
 
 ```shell
 brew install pre-commit go terraform terraform-docs
-```
-
-### Testing
-
-[Terratest](https://github.com/gruntwork-io/terratest) is being used for
-automated testing with this module. Tests in the `test` folder can be run
-locally by running the following command:
-
-```shell
-make test
-```
-
-Or with aws-vault:
-
-```shell
-AWS_VAULT_KEYCHAIN_NAME=<NAME> aws-vault exec <PROFILE> -- make test
 ```
