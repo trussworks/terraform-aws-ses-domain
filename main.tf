@@ -74,16 +74,6 @@ resource "aws_route53_record" "spf_mail_from" {
   records = ["v=spf1 include:amazonses.com -all"]
 }
 
-resource "aws_route53_record" "spf_domain" {
-  count = var.enable_spf_record ? 1 : 0
-
-  zone_id = var.route53_zone_id
-  name    = var.domain_name
-  type    = "TXT"
-  ttl     = "600"
-  records = ["v=spf1 include:amazonses.com -all"]
-}
-
 # Sending MX Record
 data "aws_region" "current" {
 }
