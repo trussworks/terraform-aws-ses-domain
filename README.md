@@ -59,7 +59,7 @@ data "aws_route53_zone" "ses_domain" {
 }
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -120,7 +120,7 @@ No modules.
 |------|-------------|
 | ses\_identity\_arn | SES identity ARN. |
 | ses\_verification\_token | A code which when added to the domain as a TXT record will signal to SES that the owner of the domain has authorised SES to act on their behalf. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 ## Developer Setup
 
