@@ -11,25 +11,8 @@ locals {
 # SES Domain Verification
 #
 
-resource "aws_ses_domain_identity" "main" {
-  domain = local.stripped_domain_name
-}
-
-resource "aws_ses_domain_identity_verification" "main" {
-  count = var.enable_verification ? 1 : 0
-
-  domain = aws_ses_domain_identity.main.id
-
-  depends_on = [aws_route53_record.ses_verification]
-}
-
-resource "aws_route53_record" "ses_verification" {
-  count   = var.enable_verification ? 1 : 0
-  zone_id = var.route53_zone_id
-  name    = "_amazonses.${aws_ses_domain_identity.main.id}"
-  type    = "TXT"
-  ttl     = "600"
-  records = concat([aws_ses_domain_identity.main.verification_token], var.extra_ses_records)
+resource "aws_sesv2_email_identity" "main" {
+  email_identity = local.stripped_domain_name
 }
 
 #
@@ -37,7 +20,7 @@ resource "aws_route53_record" "ses_verification" {
 #
 
 resource "aws_ses_domain_dkim" "main" {
-  domain = aws_ses_domain_identity.main.domain
+  domain = aws_sesv2_email_identity.main.email_identity
 }
 
 resource "aws_route53_record" "dkim" {
@@ -58,8 +41,8 @@ resource "aws_route53_record" "dkim" {
 # SES MAIL FROM Domain
 #
 
-resource "aws_ses_domain_mail_from" "main" {
-  domain           = aws_ses_domain_identity.main.domain
+resource "aws_sesv2_email_identity_mail_from_attributes" "main" {
+  email_identity   = aws_sesv2_email_identity.main.email_identity
   mail_from_domain = local.stripped_mail_from_domain
 }
 
@@ -68,7 +51,7 @@ resource "aws_route53_record" "spf_mail_from" {
   count = var.enable_spf_record ? 1 : 0
 
   zone_id = var.route53_zone_id
-  name    = aws_ses_domain_mail_from.main.mail_from_domain
+  name    = aws_sesv2_email_identity_mail_from_attributes.main.mail_from_domain
   type    = "TXT"
   ttl     = "600"
   records = ["v=spf1 include:amazonses.com -all"]
@@ -80,7 +63,7 @@ data "aws_region" "current" {
 
 resource "aws_route53_record" "mx_send_mail_from" {
   zone_id = var.route53_zone_id
-  name    = aws_ses_domain_mail_from.main.mail_from_domain
+  name    = aws_sesv2_email_identity_mail_from_attributes.main.mail_from_domain
   type    = "MX"
   ttl     = "600"
   records = ["10 feedback-smtp.${data.aws_region.current.name}.amazonses.com"]
