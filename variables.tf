@@ -14,12 +14,6 @@ variable "domain_name" {
   type        = string
 }
 
-variable "enable_verification" {
-  description = "Control whether or not to verify SES DNS records."
-  type        = bool
-  default     = true
-}
-
 variable "enable_dmarc" {
   description = "Control whether to create DMARC TXT record."
   type        = bool
