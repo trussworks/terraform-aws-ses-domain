@@ -14,11 +14,6 @@ variable "enable_spf_record" {
   type = bool
 }
 
-variable "extra_ses_records" {
-  type    = list(string)
-  default = []
-}
-
 variable "rule_set" {
   description = "Name of the SES rule set to associate rules with."
   type        = string

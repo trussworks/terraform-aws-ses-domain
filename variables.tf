@@ -70,9 +70,3 @@ variable "enable_spf_record" {
   type        = bool
   default     = true
 }
-
-variable "extra_ses_records" {
-  description = "Extra records to add to the _amazonses TXT record."
-  type        = list(string)
-  default     = []
-}
