@@ -154,7 +154,6 @@ module "ses_domain" {
   receive_s3_prefix   = local.ses_bucket_prefix
   enable_verification = var.enable_verification
   enable_spf_record   = var.enable_spf_record
-  extra_ses_records   = var.extra_ses_records
 
   ses_rule_set = var.rule_set
 }

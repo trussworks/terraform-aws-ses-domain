@@ -86,7 +86,6 @@ No modules.
 | [aws_route53_record.mx_send_mail_from](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.spf_mail_from](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
 | [aws_route53_record.txt_dmarc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [aws_ses_domain_dkim.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_domain_dkim) | resource |
 | [aws_ses_receipt_rule.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ses_receipt_rule) | resource |
 | [aws_sesv2_email_identity.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sesv2_email_identity) | resource |
 | [aws_sesv2_email_identity_mail_from_attributes.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sesv2_email_identity_mail_from_attributes) | resource |
@@ -102,7 +101,6 @@ No modules.
 | enable\_dmarc | Control whether to create DMARC TXT record. | `bool` | `true` | no |
 | enable\_incoming\_email | Control whether or not to handle incoming emails. | `bool` | `true` | no |
 | enable\_spf\_record | Control whether or not to set SPF records. | `bool` | `true` | no |
-| extra\_ses\_records | Extra records to add to the \_amazonses TXT record. | `list(string)` | `[]` | no |
 | from\_addresses | List of email addresses to catch bounces and rejections. | `list(string)` | `null` | no |
 | mail\_from\_domain | Subdomain (of the route53 zone) which is to be used as MAIL FROM address | `string` | n/a | yes |
 | receive\_s3\_bucket | Name of the S3 bucket to store received emails (required if enable\_incoming\_email is true). | `string` | `""` | no |

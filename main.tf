@@ -19,22 +19,16 @@ resource "aws_sesv2_email_identity" "main" {
 # SES DKIM Verification
 #
 
-resource "aws_ses_domain_dkim" "main" {
-  domain = aws_sesv2_email_identity.main.email_identity
-}
-
 resource "aws_route53_record" "dkim" {
   count = 3
 
   zone_id = var.route53_zone_id
-  name = format(
-    "%s._domainkey.%s",
-    element(aws_ses_domain_dkim.main.dkim_tokens, count.index),
-    var.domain_name,
-  )
+  name    = "${aws_sesv2_email_identity.main.dkim_signing_attributes[0].tokens[count.index]}._domainkey"
   type    = "CNAME"
   ttl     = "600"
-  records = ["${element(aws_ses_domain_dkim.main.dkim_tokens, count.index)}.dkim.amazonses.com"]
+  records = ["${aws_sesv2_email_identity.main.dkim_signing_attributes[0].tokens[count.index]}.dkim.amazonses.com"]
+
+  depends_on = [aws_sesv2_email_identity.main]
 }
 
 #
@@ -44,6 +38,8 @@ resource "aws_route53_record" "dkim" {
 resource "aws_sesv2_email_identity_mail_from_attributes" "main" {
   email_identity   = aws_sesv2_email_identity.main.email_identity
   mail_from_domain = local.stripped_mail_from_domain
+
+  depends_on = [aws_sesv2_email_identity.main]
 }
 
 # SPF validation record
