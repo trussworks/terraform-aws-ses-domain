@@ -27,12 +27,6 @@ Creates the following resources:
 - SES is only available in a [limited number of AWS Regions](https://docs.aws.amazon.com/general/latest/gr/ses.html).
 - SES out of the box locks the service in development mode; please see this documentation on how to make it production ready. Until the service is in production mode you can only send emails to confirmed email accounts denoted in `from_addresses`
 
-## Terraform Versions
-
-Terraform 0.13 and newer. Pin module version to ~> 3.X. Submit pull-requests to master branch.
-
-Terraform 0.12. Pin module version to ~> 2.X. Submit pull-requests to terraform012 branch.
-
 ## Usage
 
 See [examples](examples/) for functional examples on how to use this module.
@@ -64,7 +58,7 @@ data "aws_route53_zone" "ses_domain" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.13.0 |
+| terraform | >= 1.0 |
 | aws | >= 3.0 |
 
 ## Providers
